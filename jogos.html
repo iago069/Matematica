@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABMAT | Jogos Matemáticos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <h1>LABMAT</h1>
+        <p>Laboratório Interativo de Matemática</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="indexlabmat.html" class="logo"><i class="fas fa-flask"></i> LABMAT</a>
+            <div class="nav-links">
+                <a href="indexlabmat.html"><i class="fas fa-home"></i> Início</a>
+                <a href="jogos.html" class="active"><i class="fas fa-gamepad"></i> Jogos</a>
+                <a href="TUTORIAIS.html" class=""><i class="fas fa-graduation-cap"></i> Tutoriais</a>
+                <a href="Sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+                <a href="Contato.html"><i class="fas fa-envelope"></i> Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Nossos Jogos Matemáticos</h2>
+        <div class="search-filter-container">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Pesquisar jogos...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">Todos</button>
+                <button class="filter-btn" data-category="trigonometria">Trigonometria</button>
+                <button class="filter-btn" data-category="tabuada">Tabuada</button>
+                <button class="filter-btn" data-category="geometria">Geometria</button>
+                <button class="filter-btn" data-category="algebra">Álgebra</button>
+                <button class="filter-btn" data-category="calculos">Cálculos</button>
+            </div>
+        </div>
+
+        <div class="games-grid">
+            <!-- Jogo 1 -->
+            <div class="game-card" data-category="trigonometria" data-name="matix">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/MATIX.jpg" alt="MATIX">
+                </div>
+                <div class="game-info">
+                    <h3>MATIX</h3>
+                    <p>Desafios de matrizes e álgebra linear</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Resolva problemas com matrizes e operações lineares:</p>
+                    <ol>
+                        <li>Escolha o nível de dificuldade</li>
+                        <li>Resolva as operações matriciais</li>
+                        <li>Avance para desafios mais complexos</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Intermediária</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 20-40 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 2 -->
+            <div class="game-card" data-category="algebra" data-name="algeplan">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/ALGEPLAN.jpg" alt="ALGEPLAN">
+                </div>
+                <div class="game-info">
+                    <h3>ALGEPLAN</h3>
+                    <p>Álgebra com peças manipuláveis</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Represente expressões algébricas com peças físicas:</p>
+                    <ol>
+                        <li>Monte a equação com as peças</li>
+                        <li>Resolva passo a passo</li>
+                        <li>Verifique sua solução</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Básica</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 3 -->
+            <div class="game-card" data-category="geometria" data-name="damas">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Damas.jpg" alt="Damas Matemáticas">
+                </div>
+                <div class="game-info">
+                    <h3>DAMAS</h3>
+                    <p>Damas com desafios matemáticos</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Jogue damas resolvendo problemas matemáticos:</p>
+                    <ol>
+                        <li>Resolva o problema para fazer seu movimento</li>
+                        <li>Capture peças respondendo corretamente</li>
+                        <li>Vença o jogo tradicional</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Variável</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-45 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 4 -->
+            <div class="game-card" data-category="calculos" data-name="discos de fracoes">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Discos de Fraçoes.jpg" alt="Discos de Frações">
+                </div>
+                <div class="game-info">
+                    <h3>DISCOS DE FRAÇÕES</h3>
+                    <p>Aprenda frações de forma visual</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Manipule discos para entender frações:</p>
+                    <ol>
+                        <li>Combine discos para formar inteiros</li>
+                        <li>Compare frações equivalentes</li>
+                        <li>Realize operações com frações</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Básica</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 5 -->
+            <div class="game-card" data-category="tabuada" data-name="dominó">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Dominó.jpg" alt="Dominó Matemático">
+                </div>
+                <div class="game-info">
+                    <h3>DOMINÓ</h3>
+                    <p>Dominó com operações matemáticas</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Jogue dominó conectando operações e resultados:</p>
+                    <ol>
+                        <li>Combine peças com operações equivalentes</li>
+                        <li>Resolva as operações para continuar</li>
+                        <li>Vença esgotando suas peças</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Básica</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 6 -->
+            <div class="game-card" data-category="geometria" data-name="jogo da memoria">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Jogo da Memória.jpg" alt="Jogo da Memória Geométrico">
+                </div>
+                <div class="game-info">
+                    <h3>JOGO DA MEMÓRIA</h3>
+                    <p>Memória com formas geométricas</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Encontre pares de cartas geométricas:</p>
+                    <ol>
+                        <li>Vire duas cartas por vez</li>
+                        <li>Encontre formas equivalentes</li>
+                        <li>Memorize as posições</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Fácil</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 10-20 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 7 -->
+            <div class="game-card" data-category="calculos" data-name="ludo">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/LUDO.jpg" alt="Ludo Matemático">
+                </div>
+                <div class="game-info">
+                    <h3>LUDO</h3>
+                    <p>Ludo com desafios de cálculo</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Jogue ludo resolvendo problemas para avançar:</p>
+                    <ol>
+                        <li>Resolva o cálculo para mover sua peça</li>
+                        <li>Responda corretamente para capturar peças</li>
+                        <li>Chegue primeiro ao centro</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Variável</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 20-45 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 8 -->
+            <div class="game-card" data-category="algebra" data-name="material dourado">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/MATERIAL DOURADO INDIVIDUAL.jpg" alt="Material Dourado">
+                </div>
+                <div class="game-info">
+                    <h3>MATERIAL DOURADO</h3>
+                    <p>Sistema decimal com material concreto</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Represente números e operações com material dourado:</p>
+                    <ol>
+                        <li>Monte números com as peças</li>
+                        <li>Realize operações de soma e subtração</li>
+                        <li>Compreenda o sistema decimal</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Fácil</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 9 -->
+            <div class="game-card" data-category="geometria" data-name="multiplanos">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/MULTIPLANO.jpg" alt="Multiplanos">
+                </div>
+                <div class="game-info">
+                    <h3>MULTIPLANO</h3>
+                    <p>Geometria plana e espacial</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Construa figuras geométricas no multiplano:</p>
+                    <ol>
+                        <li>Use elásticos para formar figuras</li>
+                        <li>Calcule áreas e perímetros</li>
+                        <li>Explore propriedades geométricas</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Intermediária</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 20-40 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 10 -->
+            <div class="game-card" data-category="calculos" data-name="resta um">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/RESTA UM.jpg" alt="Resta Um Matemático">
+                </div>
+                <div class="game-info">
+                    <h3>RESTA UM</h3>
+                    <p>Jogo de estratégia com cálculos</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Jogue resta um resolvendo problemas matemáticos:</p>
+                    <ol>
+                        <li>Resolva o cálculo para fazer seu movimento</li>
+                        <li>Elimine peças pulando sobre elas</li>
+                        <li>Deixe apenas uma peça no tabuleiro</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Intermediária</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 11 -->
+            <div class="game-card" data-category="calculos" data-name="régua de fracoes">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Régua de Frações.jpg" alt="Régua de Frações">
+                </div>
+                <div class="game-info">
+                    <h3>RÉGUA DE FRAÇÕES</h3>
+                    <p>Compare e opere frações visualmente</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Use a régua para trabalhar com frações:</p>
+                    <ol>
+                        <li>Identifique frações equivalentes</li>
+                        <li>Compare tamanhos de frações</li>
+                        <li>Some e subtraia frações</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Básica</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 12 -->
+            <div class="game-card" data-category="geometria" data-name="torre de hanoi">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Torre de Hanoi.jpg" alt="Torre de Hanoi">
+                </div>
+                <div class="game-info">
+                    <h3>TORRE DE HANOI</h3>
+                    <p>Desafio de lógica e sequência</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Resolva o quebra-cabeça da Torre de Hanoi:</p>
+                    <ol>
+                        <li>Mova todos os discos para outra haste</li>
+                        <li>Não coloque disco maior sobre menor</li>
+                        <li>Use o menor número de movimentos</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Variável</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 10-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 13 -->
+            <div class="game-card" data-category="geometria" data-name="tangram">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/unnamed.jpg" alt="Tangram">
+                </div>
+                <div class="game-info">
+                    <h3>TANGRAM</h3>
+                    <p>Quebra-cabeça geométrico chinês</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Monte figuras usando todas as peças:</p>
+                    <ol>
+                        <li>Escolha um desafio</li>
+                        <li>Use todas as 7 peças</li>
+                        <li>Não sobreponha as peças</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Variável</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 10-30 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 14 -->
+            <div class="game-card" data-category="calculos" data-name="xadrez">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/Xadrez.jpg" alt="Xadrez Matemático">
+                </div>
+                <div class="game-info">
+                    <h3>XADREZ</h3>
+                    <p>Xadrez com problemas matemáticos</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Jogue xadrez resolvendo desafios matemáticos:</p>
+                    <ol>
+                        <li>Resolva o problema para fazer seu movimento</li>
+                        <li>Calcule estratégias usando matemática</li>
+                        <li>Dê xeque-mate no rei adversário</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Avançada</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 30-60 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogo 15 -->
+            <div class="game-card" data-category="calculos" data-name="abaco">
+                <div class="game-img-container">
+                    <img src="images/Fotos jogos/ÁBACO ESCOLAR.jpg" alt="Ábaco">
+                </div>
+                <div class="game-info">
+                    <h3>ÁBACO</h3>
+                    <p>Cálculos com ábaco escolar</p>
+                    <div class="game-details">
+                        <span class="status available">Disponível</span>
+                        <div class="game-actions">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i> Reservar
+                            </button>
+                            <button class="about-btn" onclick="openAboutModal(this)">
+                                <i class="fas fa-info-circle"></i> Sobre
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" style="display:none">
+                    <h4>Como Jogar:</h4>
+                    <p>Realize operações matemáticas no ábaco:</p>
+                    <ol>
+                        <li>Represente números no ábaco</li>
+                        <li>Some e subtraia movendo as contas</li>
+                        <li>Resolva problemas propostos</li>
+                    </ol>
+                    <div class="about-footer">
+                        <span class="difficulty"><i class="fas fa-bolt"></i> Dificuldade: Básica</span>
+                        <span class="duration"><i class="fas fa-clock"></i> Duração: 15-30 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 IFRS - Todos os direitos reservados</p>
+    </footer>
+
+    <script src="index.js"></script>
+    
+    <!-- Modal de Reserva -->
+    <div id="reservaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="reservaTitle">Reservar Jogo</h2>
+            <form id="reservaForm">
+                <input type="hidden" id="jogoId">
+                <div class="form-group">
+                    <label for="nomeUsuario">Seu Nome:</label>
+                    <input type="text" id="nomeUsuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailUsuario">Seu E-mail:</label>
+                    <input type="email" id="emailUsuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="dataReserva">Data da Reserva:</label>
+                    <input type="date" id="dataReserva" required>
+                </div>
+                <div class="form-group">
+                    <label for="horaReserva">Hora da Reserva:</label>
+                    <input type="time" id="horaReserva" required>
+                </div>
+                <button type="submit" class="btn-reservar">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
