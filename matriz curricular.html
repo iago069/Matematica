@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz Curricular - Matemática Licenciatura</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gold: #ffd700;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            font-weight: 300;
+        }
+
+        /* Navegação */
+        nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Conteúdo Principal */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Estilos da Matriz Curricular */
+        .matriz-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .semestre-header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .semestre-header:hover {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+        }
+
+        .semestre-header h3 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .semestre-header .toggle-icon {
+            transition: var(--transition);
+        }
+
+        .semestre-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .semestre-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+
+        .semestre-content.active {
+            max-height: 5000px;
+        }
+
+        .disciplinas-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .disciplinas-table th {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .disciplinas-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .disciplinas-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .disciplinas-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .disciplina-nome {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .disciplina-carga {
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .disciplina-pre {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .disciplina-pre i {
+            color: var(--accent);
+            margin-right: 0.3rem;
+        }
+
+        .resumo-total {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .resumo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .resumo-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .resumo-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .resumo-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .resumo-card small {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .disciplinas-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                justify-content: center;
+            }
+
+            .semestre-header h3 {
+                font-size: 1.2rem;
+            }
+
+            .resumo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1> MATRIZ CURRICULAR</h1>
+        <p>Curso de Matemática - Licenciatura</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-university"></i> Matemática
+            </a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Início</a>
+
+                <a href="indexlabmat.html"><i class="fas fa-flask"></i> Laboratório</a>
+                <a href="#"><i class="fas fa-chalkboard-teacher"></i> Docentes</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="section-title">Matriz Curricular do Curso</h2>
+
+        <div class="resumo-total">
+            <h3>Resumo da Carga Horária</h3>
+            <div class="resumo-grid">
+                <div class="resumo-card">
+                    <h4>Total de Horas</h4>
+                    <p>3.165</p>
+                    <small>Horas relógio</small>
+                </div>
+                <div class="resumo-card">
+                    <h4>Presencial</h4>
+                    <p>2.493</p>
+                    <small>78.8% do total</small>
+                </div>
+                <div class="resumo-card">
+                    <h4>EaD</h4>
+                    <p>272</p>
+                    <small>8.9% do total</small>
+                </div>
+                <div class="resumo-card">
+                    <h4>Atividades Complementares</h4>
+                    <p>200</p>
+                    <small>Horas teórico-práticas</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Semestre I -->
+        <div class="matriz-container">
+            <div class="semestre-header active">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 1º Semestre</h3>
+                <span>Total: 398 horas (480 horas aula)</span>
+            </div>
+            <div class="semestre-content active">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">História da Educação</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Geometria Descritiva e Projetiva</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Tecnologias da Informação e Comunicação para a Educação</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Matemática Fundamental I</td>
+                            <td class="disciplina-carga">116h (140h aula)</td>
+                            <td class="disciplina-carga">7</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Técnicas de Contagem e Probabilidade</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre II -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 2º Semestre</h3>
+                <span>Total: 381 horas (460 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Filosofia e Sociologia da Educação</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Leitura e Produção de Textos</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Matemática Fundamental II</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Matemática Fundamental I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Geometria I</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Geometria Descritiva e
+                                Projetiva</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Algebra Linear I</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre III -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 3º Semestre</h3>
+                <span>Total: 398 horas (480 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Didática Geral I</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Matemática Fundamental III</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Matemática Fundamental II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Geometria II</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Geometria I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Psicologia da Educação</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Algebra Linear II</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Algebra Linear I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Língua Brasileira de Sinais</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre IV -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 4º Semestre</h3>
+                <span>Total: 398 horas (480 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Didática Geral II</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Didática Geral I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Legislação da Educação Básica</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Geometria Analítica I</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Geometria II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Cálculo Diferencial e Integral I</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Matemática Fundamental III
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Laboratório de Ensino de Matemática no Ensino Fundamental</td>
+                            <td class="disciplina-carga">100h (120h aula)</td>
+                            <td class="disciplina-carga">6</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Didática Geral I, Psicologia
+                                da Educação, Matemática Fundamental III</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Lógica Matemática</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre V -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 5º Semestre</h3>
+                <span>Total: 381 horas (460 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Metodologia da Pesquisa</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Leitura e Produção de Textos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Geometria Analítica II</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Geometria Analítica I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Cálculo Diferencial e Integral II</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Tecnologias Digitais no Ensino de Matemática</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Tecnologias da Informação e
+                                Comunicação para a Educação</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Educação em Direitos Humanos</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Estágio Supervisionado no Ensino Fundamental I</td>
+                            <td class="disciplina-carga">100h (120h aula)</td>
+                            <td class="disciplina-carga">6</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Laboratório de Ensino de
+                                Matemática no Ensino Fundamental, Didática Geral II</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre VI -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 6º Semestre</h3>
+                <span>Total: 448 horas (540 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Estatística</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Técnicas de Contagem e
+                                Probabilidade</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Física I</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Cálculo Diferencial e Integral III</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Laboratório de Ensino de Matemática no Ensino Médio</td>
+                            <td class="disciplina-carga">100h (120h aula)</td>
+                            <td class="disciplina-carga">6</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Estágio Supervisionado no
+                                Ensino Fundamental I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Estágio Supervisionado no Ensino Fundamental II</td>
+                            <td class="disciplina-carga">116h (140h aula)</td>
+                            <td class="disciplina-carga">7</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Integralização até o quarto
+                                semestre (incluindo este), Estágio Supervisionado no Ensino Fundamental I</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre VII -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 7º Semestre</h3>
+                <span>Total: 381 horas (460 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Optativa</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Cálculo Diferencial e Integral IV</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                III</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Álgebra</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Estágio Supervisionado no Ensino Médio I</td>
+                            <td class="disciplina-carga">100h (120h aula)</td>
+                            <td class="disciplina-carga">6</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Laboratório de Ensino de
+                                Matemática no Ensino Médio, Estágio Supervisionado no Ensino Fundamental II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Física II</td>
+                            <td class="disciplina-carga">83h (100h aula)</td>
+                            <td class="disciplina-carga">5</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Física I</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Semestre VIII -->
+        <div class="matriz-container">
+            <div class="semestre-header">
+                <h3><i class="fas fa-chevron-down toggle-icon"></i> 8º Semestre</h3>
+                <span>Total: 380 horas (460 horas aula)</span>
+            </div>
+            <div class="semestre-content">
+                <table class="disciplinas-table">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Carga Horária</th>
+                            <th>Aulas Semanais</th>
+                            <th>Pré-requisitos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="disciplina-nome">Equações Diferenciais</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Cálculo Numérico</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Variáveis Complexas</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Cálculo Diferencial e Integral
+                                II</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Matemática Financeira</td>
+                            <td class="disciplina-carga">33h (40h aula)</td>
+                            <td class="disciplina-carga">2</td>
+                            <td class="disciplina-pre">-</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Estágio Supervisionado no Ensino Médio II</td>
+                            <td class="disciplina-carga">116h (140h aula)</td>
+                            <td class="disciplina-carga">7</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Integralização até o sexto
+                                semestre (incluindo este) e Estágio Supervisionado no Ensino Médio I</td>
+                        </tr>
+                        <tr>
+                            <td class="disciplina-nome">Trabalho de Conclusão de Curso</td>
+                            <td class="disciplina-carga">66h (80h aula)</td>
+                            <td class="disciplina-carga">4</td>
+                            <td class="disciplina-pre"><i class="fas fa-arrow-right"></i> Integralização até o sexto
+                                semestre (incluindo este) e 50% dos componentes curriculares do sétimo semestre</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Curso de Matemática - Licenciatura. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Função para alternar a exibição do conteúdo do semestre
+        document.querySelectorAll('.semestre-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+
+                // Atualiza o ícone
+                const icon = header.querySelector('.toggle-icon');
+                if (header.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-right');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

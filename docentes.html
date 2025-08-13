@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docentes - Matemática Licenciatura</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gold: #ffd700;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            font-weight: 300;
+        }
+
+        /* Navegação */
+        nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a.active {
+            background-color: var(--accent);
+        }
+
+        /* Conteúdo Principal */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Estilos da Equipe Docente */
+        .docentes-intro {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .docentes-intro p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .docentes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .docente-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .docente-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .docente-img-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .docente-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .docente-card:hover .docente-img {
+            transform: scale(1.05);
+        }
+
+        .docente-info {
+            padding: 1.5rem;
+        }
+
+        .docente-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .docente-titulacao {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .docente-disciplinas {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .docente-disciplinas strong {
+            color: var(--primary);
+        }
+
+        .docente-contato {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .contato-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .contato-item i {
+            color: var(--secondary);
+            width: 20px;
+        }
+
+        .areas-interesse {
+            margin-top: 1rem;
+        }
+
+        .areas-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background-color: #f0f8ff;
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .docentes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-chalkboard-teacher"></i> DOCENTES</h1>
+        <p>Curso de Matemática - Licenciatura</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-university"></i> Matemática
+            </a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Início</a>
+                <a href="matriz-curricular.html"><i class="fas fa-book"></i> Matriz Curricular</a>
+                <a href="indexlabmat.html"><i class="fas fa-flask"></i> Laboratório</a>
+                <a href="#"><i class="fas fa-chalkboard-teacher"></i> Docentes</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="section-title">Nossa Equipe Docente</h2>
+        
+        <div class="docentes-intro">
+            <p>O curso de Matemática - Licenciatura conta com um corpo docente altamente qualificado, composto por mestres e doutores com ampla experiência tanto na área acadêmica quanto no ensino básico. Nossos professores estão comprometidos com a formação de educadores matemáticos críticos, reflexivos e preparados para os desafios da educação contemporânea.</p>
+            <p>Conheça abaixo os professores que compõem nosso quadro permanente:</p>
+        </div>
+
+        <div class="docentes-grid">
+            <!-- Docente 1 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Prof. Dr. Carlos Eduardo Silva" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3> Fabiane Beatriz Sestari</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Doutor em Matemática - UFMG</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> Cálculo Diferencial e Integral, Equações Diferenciais, Análise Matemática</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> carlos.silva@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-8888
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Segundas e Quartas, 14h-18h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">Análise Matemática</span>
+                            <span class="tag">Equações Diferenciais</span>
+                            <span class="tag">Ensino de Cálculo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docente 2 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Profa. Dra. Ana Paula Oliveira" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3>Profa. Dra. Ana Paula Oliveira</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Doutora em Educação Matemática - UNESP</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> Didática Geral, Laboratório de Ensino de Matemática, Estágio Supervisionado</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> ana.oliveira@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-7777
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Terças e Quintas, 10h-12h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">Educação Matemática</span>
+                            <span class="tag">Formação de Professores</span>
+                            <span class="tag">Tecnologias Educacionais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docente 3 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Prof. Dr. Marcos Antônio Costa" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3>Prof. Dr. Marcos Antônio Costa</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Doutor em Álgebra - USP</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> Álgebra Linear, Geometria Analítica, Estruturas Algébricas</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> marcos.costa@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-6666
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Segundas e Quartas, 19h-21h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">Álgebra</span>
+                            <span class="tag">Teoria dos Números</span>
+                            <span class="tag">Geometria</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docente 4 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1542190891-2093d38760f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Profa. Dra. Juliana Mendes" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3>Profa. Dra. Juliana Mendes</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Doutora em Estatística - UFSCar</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> Probabilidade e Estatística, Matemática Financeira, Análise de Dados</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> juliana.mendes@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-5555
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Terças e Quintas, 14h-16h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">Estatística Aplicada</span>
+                            <span class="tag">Probabilidade</span>
+                            <span class="tag">Educação Estatística</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docente 5 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Prof. Me. Rafael Gonçalves" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3>Prof. Me. Rafael Gonçalves</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Mestre em Física Matemática - UFMG</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> Física para Matemáticos, Cálculo Numérico, Variáveis Complexas</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> rafael.goncalves@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-4444
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Segundas e Sextas, 16h-18h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">Física Matemática</span>
+                            <span class="tag">Métodos Numéricos</span>
+                            <span class="tag">Modelagem Matemática</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docente 6 -->
+            <div class="docente-card">
+                <div class="docente-img-container">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Profa. Dra. Patrícia Almeida" class="docente-img">
+                </div>
+                <div class="docente-info">
+                    <h3>Profa. Dra. Patrícia Almeida</h3>
+                    <p class="docente-titulacao"><i class="fas fa-graduation-cap"></i> Doutora em Educação - UFMG</p>
+                    <p class="docente-disciplinas"><strong>Disciplinas:</strong> História da Educação, Filosofia da Educação, Psicologia da Educação</p>
+                    
+                    <div class="docente-contato">
+                        <div class="contato-item">
+                            <i class="fas fa-envelope"></i> patricia.almeida@universidade.edu.br
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-phone"></i> (31) 99999-3333
+                        </div>
+                        <div class="contato-item">
+                            <i class="fas fa-clock"></i> Quartas e Sextas, 10h-12h
+                        </div>
+                    </div>
+                    
+                    <div class="areas-interesse">
+                        <p><strong>Áreas de Interesse:</strong></p>
+                        <div class="areas-tags">
+                            <span class="tag">História da Educação</span>
+                            <span class="tag">Filosofia da Educação</span>
+                            <span class="tag">Formação Docente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Curso de Matemática - Licenciatura. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
